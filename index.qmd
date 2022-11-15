@@ -1,7 +1,7 @@
 ---
 title: "visualizing data"
-subtitle: "<br>🔗 [bit.ly/dataviz-ncpma](https://bit.ly/dataviz-ncpma)"
-author: "<br> dr. mine çetinkaya-rundel <br> duke university"
+subtitle: "<br>🔗 [mine.quarto.pub/visualizing-data](https://mine.quarto.pub/visualizing-data)"
+author: "<br> dr. mine çetinkaya-rundel <br> duke university + posit"
 format: 
   revealjs:
     height: 900

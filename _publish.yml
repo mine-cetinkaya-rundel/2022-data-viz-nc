@@ -1,0 +1,4 @@
+- source: index.qmd
+  quarto-pub:
+    - id: 7d3cf958-3e3c-4fa0-b6f8-763456fbeec2
+      url: 'https://quartopub.com/sites/mine/visualizing-data'
