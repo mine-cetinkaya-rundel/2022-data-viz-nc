@@ -1,0 +1,38 @@
+/*-- scss:defaults --*/
+@import url(https://fonts.googleapis.com/css?family=Atkinson+Hyperlegible:300,300i&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Atkinson+Hyperlegible&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap);
+
+$link-color: #468189;
+$font-family-sans-serif: 'Atkinson Hyperlegible';
+$presentation-font-size-root: 36px;
+$font-family-monospace: 'Source Code Pro';
+$presentation-heading-color: #468189;
+
+/*-- scss:rules --*/
+
+.reveal .slide .hand {
+  font-family      : 'Gochi Hand', cursive;
+  font-size        : 125%;
+}
+
+.reveal .slide .task {
+  padding-right    : 10px;
+  padding-left     : 10px;
+  padding-top      : 3px;
+  padding-bottom   : 3px;
+  margin-bottom    : 6px;
+  margin-top       : 6px;
+  border-left      : solid 5px #468189;
+  background-color : #9DBEBB;
+}
+
+.reveal .slide blockquote {
+  border-left: solid 5px #9DBEBB80;
+  padding-left: 1em;
+}
+
+.reveal .slide aside {
+  color: #222;
+}
+
