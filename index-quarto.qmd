@@ -34,28 +34,24 @@ ggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))
 set.seed(1234)
 ```
 
-# .hand[why] visualize
+# [why]{.hand} visualize
 
-##
+## 
 
 > *"The simple graph has brought more information to the data analyst's mind than any other device."*
 >
->John Tukey
+> John Tukey
+
+## 
+
+[We visualize data to ...]{.hand}
+
+-   discover patterns that may not be obvious from numerical summaries
+
+## 
 
 ```{r}
-knitr::knit_exit()
-```
-
-##
-
-.hand[We visualize data to ...]
-
-- discover patterns that may not be obvious from numerical summaries
-
-##
-
-```{r}
-datasaurus_dozen <- datasaurus_dozen %>%
+datasaurus_dozen <- datasaurus_dozen |>
   mutate(dataset = case_when(
     dataset == "dino"       ~ "Dataset 1",
     dataset == "away"       ~ "Dataset 2",
@@ -75,69 +71,83 @@ datasaurus_dozen <- datasaurus_dozen %>%
   )
 ```
 
-.pull-left-narrow[
-.task[
-We have 13 datasets, each with 142 observations. For each observation we have values on two variables recorded: an X and a Y.
+::: columns
+::: {.column width="27%"}
+::: task
+We have 13 datasets, each with 142 observations.
+For each observation we have values on two variables recorded: an X and a Y.
 
-Summary statistics for these two variables for each of the datasets is given on the right. 
+Summary statistics for these two variables for each of the datasets is given on the right.
 
 How, if at all, are these 13 datasets different from each other?
-]
-]
-.pull-right-wide[
+:::
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="70%"}
 ```{r}
-datasaurus_dozen %>%
-  group_by(dataset) %>%
+datasaurus_dozen |>
+  group_by(dataset) |>
   summarise(
     n = n(),
     `Average x` = round(mean(x), 1),
     `Average y` = round(mean(y), 1)
-  ) %>%
+  ) |>
   kable()
 ```
-]
+:::
+:::
 
+## 
 
-
-##
-
-.pull-left-narrow[
-.task[
+::: columns
+::: {.column width="27%"}
+::: task
 Some more summary statistics...
 
 How, if at all, are these 13 datasets different from each other?
-]
-]
-.pull-right-wide[
+:::
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="70%"}
 ```{r}
-datasaurus_dozen %>%
-  group_by(dataset) %>%
+datasaurus_dozen |>
+  group_by(dataset) |>
   summarise(
     n = n(),
     `Average x` = round(mean(x), 1),
     `Average y` = round(mean(y), 1),
     `St Dev x` = round(sd(x), 1),
     `St Dev y` = round(sd(y), 1)
-  ) %>%
+  ) |>
   kable()
 ```
-]
+:::
+:::
 
+## 
 
-
-##
-
-.pull-left-narrow[
-.task[
+::: columns
+::: {.column width="27%"}
+::: task
 And some more summary statistics...
 
 How, if at all, are these 13 datasets different from each other?
-]
-]
-.pull-right-wide[
+:::
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="70%"}
 ```{r}
-datasaurus_dozen %>%
-  group_by(dataset) %>%
+datasaurus_dozen |>
+  group_by(dataset) |>
   summarise(
     n = n(),
     `Average x` = round(mean(x), 1),
@@ -145,157 +155,173 @@ datasaurus_dozen %>%
     `St Dev x` = round(sd(x), 1),
     `St Dev y` = round(sd(y), 1),
     `Correlation` = round(cor(x, y), 1)
-  ) %>%
+  ) |>
   kable()
 ```
-]
+:::
+:::
 
+## 
 
-
-##
-
-.pull-left-narrow[
-.task[
+::: columns
+::: {.column width="27%"}
+::: task
 And finally a visualization!
 
 How, if at all, are these 13 datasets different from each other?
-]
-]
-.pull-right-wide[
+:::
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="70%"}
 ```{r}
-#| fig.asp: 0.8
-#| out.width: 100%
-datasaurus_dozen %>%
+#| fig-asp: 0.8
+#| out-width: 100%
+
+datasaurus_dozen |>
   ggplot(aes(x = x, y = y, color = dataset)) +
   geom_point(show.legend = FALSE) +
   facet_wrap(~dataset) +
   scale_color_viridis_d()
 ```
-]
+:::
+:::
 
+## 
 
+[We visualize data to ...]{.hand}
 
-##
+-   discover patterns that may not be obvious from numerical summaries
 
+-   convey information in a way that is otherwise difficult/impossible to convey
 
+## 
 
-.hand[We visualize data to ...]
-
-- discover patterns that may not be obvious from numerical summaries
-
-- convey information in a way that is otherwise difficult/impossible to convey
-
-
-
-##
-
-.pull-left-narrow[
-.task[
+::: columns
+::: {.column width="27%"}
+::: task
 Describe, in words, what this visualization shows.
-]
+:::
+:::
 
-.small[
-Source: [Financial Times](https://www.ft.com/content/a2901ce8-5eb7-4633-b89c-cbdf5b386938), 27 Aug 2021.
-]
-]
-.pull-right-wide[
+::: {.column width="3%"}
+:::
+
+::: {.column width="70%"}
 ```{r}
 #| out.width: 100%
 knitr::include_graphics("images/ft-covid-excess-deaths.png")
 ```
-]
+:::
+:::
 
+::: aside
+Source: [Financial Times](https://www.ft.com/content/a2901ce8-5eb7-4633-b89c-cbdf5b386938), 27 Aug 2021.
+:::
 
+## 
 
-##
-
-.pull-left-narrow[
-.task[
+::: columns
+::: {.column width="27%"}
+::: task
 Describe, in words, what this visualization shows.
-]
+:::
+:::
 
-.small[
-Source: [New York Times](https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html), 27 Aug 2021.
-]
-]
-.pull-right-wide[
+::: {.column width="3%"}
+:::
+
+::: {.column width="70%"}
 ```{r}
 #| out.width: 100%
 knitr::include_graphics("images/nytimes-us-covid-vaccine.png")
 ```
-]
+:::
+:::
 
-##
+::: aside
+Source: [New York Times](https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html), 27 Aug 2021.
+:::
 
-.pull-left-narrow[
-.task[
+## 
+
+::: columns
+::: {.column width="27%"}
+::: task
 Describe, in words, what this visualization shows.
-]
+:::
+:::
 
-.small[
-Source: Kieran Healy - [Excess Deaths in 2020](https://kieranhealy.org/blog/archives/2021/10/21/excess-deaths-in-2020/), 21 Oct 2021.
-]
-]
-.pull-right-wide[
+::: {.column width="3%"}
+:::
+
+::: {.column width="70%"}
 ```{r}
-#| out.width: 50%
-#| fig.align: center
+#| out-width: 50%
+#| fig-align: center
+
 knitr::include_graphics("images/healy-excess_all_cause_by_jurisdiction.png")
 ```
-]
+:::
+:::
 
-# .hand[how] visualize
+::: aside
+Source: Kieran Healy - [Excess Deaths in 2020](https://kieranhealy.org/blog/archives/2021/10/21/excess-deaths-in-2020/), 21 Oct 2021.
+:::
 
-## and .hand[how not]
+# [how]{.hand} visualize
 
-## Case study 1: 
+## and [how not]{.hand}
 
-## Trends instructional staff employees in universities
+## Case study 1: <br> Trends instructional staff employees in universities {.center}
 
+## 
 
-
-##
-
-The American Association of University Professors (AAUP) is a nonprofit membership association of faculty and other academic professionals. 
+The American Association of University Professors (AAUP) is a nonprofit membership association of faculty and other academic professionals.
 [This report](https://www.aaup.org/sites/default/files/files/AAUP_Report_InstrStaff-75-11_apr2013.pdf) by the AAUP shows trends in instructional staff employees between 1975 and 2011, and contains the following image.
 
-.pull-left-narrow[
-.task[
+::: columns
+::: {.column width="27%"}
+::: task
 What trends are apparent in the visualization on the right?
-]
-]
-.pull-right-wide[
+:::
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="70%"}
 ```{r}
-#| out.width: 85%
-#| fig.align: center
+#| out-width: 85%
+#| fig-align: center
+
 knitr::include_graphics("images/staff-employment.png")
 ```
-]
-
-
+:::
+:::
 
 ## Data
 
-Each row in this dataset represents a faculty type, and the columns are the years for which we have data. 
+Each row in this dataset represents a faculty type, and the columns are the years for which we have data.
 The values are percentage of hires of that type of faculty for each year.
 
 ```{r}
 #| label: load-data-staff
 #| message: false
 staff <- read_csv("data/instructional-staff.csv")
-staff %>%
-  rename(`Faculty type` = faculty_type) %>%
+staff |>
+  rename(`Faculty type` = faculty_type) |>
   kable()
 ```
-
-
 
 ## Recreate
 
 ```{r}
-staff_long <- staff %>%
+staff_long <- staff |>
   pivot_longer(cols = -faculty_type, names_to = "year", 
-               values_to = "percentage") %>%
+               values_to = "percentage") |>
   mutate(
     percentage = as.numeric(percentage),
     faculty_type = fct_relevel(faculty_type,
@@ -307,16 +333,16 @@ staff_long <- staff %>%
     )
 ```
 
-
 ```{r}
-#| fig.asp: 0.5
-#| fig.with: 12.0
+#| fig-asp: 0.5
+#| fig-width: 12.0
+
 str_wrap_factor <- function(x, ...) {
   levels(x) <- str_wrap(levels(x), ...)
   x
 }
 
-staff_long %>%
+staff_long |>
   ggplot(aes(x = str_wrap_factor(faculty_type, 20), 
              y = percentage, 
              fill = year)) +
@@ -346,18 +372,17 @@ staff_long %>%
   guides(fill = guide_legend(nrow = 1))
 ```
 
-
-
 ## Represent percentages as parts of a whole
 
 ```{r}
-#| fig.asp: 0.5
-#| fig.with: 12.0
-staff_long %>%
+#| fig-asp: 0.5
+#| fig-width: 12.0
+
+staff_long |>
   ggplot(aes(x = str_wrap_factor(faculty_type, 20), 
              y = percentage, 
              fill = fct_rev(year))) +
-  geom_col(position = "fill", color = "white", size = 0.2) +
+  geom_col(position = "fill", color = "white", linewidth = 0.2) +
   scale_y_continuous(labels = label_percent()) +
   labs(x = NULL, 
        y = "Percent of Total Instructional Staff", 
@@ -378,19 +403,18 @@ staff_long %>%
   )
 ```
 
-
-
 ## Place time on x-axis
 
 ```{r}
-#| fig.asp: 0.5
-#| fig.with: 12.0
-staff_long %>%
+#| fig-asp: 0.5
+#| fig-with: 12.0
+
+staff_long |>
   ggplot(aes(x = year, 
              y = percentage, 
              color = str_wrap(faculty_type, 20), 
              group = str_wrap(faculty_type, 20))) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   labs(x = NULL, 
        y = "Percent of Total Instructional Staff", 
        color = NULL,
@@ -406,14 +430,13 @@ staff_long %>%
   )
 ```
 
-
-
 ## Represent time as time
 
 ```{r}
-#| fig.asp: 0.5
-#| fig.with: 12.0
-staff_long <- staff_long %>%
+#| fig-asp: 0.5
+#| fig-with: 12.0
+
+staff_long <- staff_long |>
   mutate(year = as.numeric(year))
 
 ggplot(staff_long,
@@ -421,7 +444,7 @@ ggplot(staff_long,
            y = percentage, 
              color = str_wrap(faculty_type, 20), 
              group = str_wrap(faculty_type, 20))) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   labs(x = NULL, 
        y = "Percent of Total Instructional Staff", 
        color = NULL,
@@ -436,8 +459,6 @@ ggplot(staff_long,
     plot.caption = element_text(size = 8, hjust = 0)
   )
 ```
-
-
 
 ## Use an accessible color scale
 
@@ -448,8 +469,6 @@ This is how the previous plot might look like to someone with Deuteranopia (a ty
 knitr::include_graphics("images/deuteranopia.png")
 ```
 
-
-
 ## Use an accessible color scale
 
 This is it might look like to someone with Protanopia (also a type of red-green confusion)
@@ -459,19 +478,18 @@ This is it might look like to someone with Protanopia (also a type of red-green 
 knitr::include_graphics("images/protanopia.png")
 ```
 
-
-
 ## Use an accessible color scale
 
 ```{r}
-#| fig.asp: 0.5
-#| fig.with: 12.0
+#| fig-asp: 0.5
+#| fig-with: 12.0
+
 ggplot(staff_long,
        aes(x = year, 
            y = percentage, 
              color = str_wrap(faculty_type, 20), 
              group = str_wrap(faculty_type, 20))) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   labs(x = NULL, 
        y = "Percent of Total Instructional Staff", 
        color = NULL,
@@ -488,21 +506,20 @@ ggplot(staff_long,
   scale_color_OkabeIto()
 ```
 
-
-
 ## Use direct labeling
 
 ```{r}
-#| fig.asp: 0.5
-#| fig.with: 12.0
-staff_long %>%
+#| fig-asp: 0.5
+#| fig-with: 12.0
+
+staff_long |>
   ggplot(aes(x = year, 
              y = percentage, 
              color = faculty_type, 
              group = faculty_type)) +
-  geom_line(size = 1, show.legend = FALSE) +
+  geom_line(linewidth = 1, show.legend = FALSE) +
   geom_text(
-    data = staff_long %>% filter(year == max(year)),
+    data = staff_long |> filter(year == max(year)),
     aes(x = year + 1, y = percentage, label = faculty_type),
     hjust = "left", show.legend = FALSE, size = 4
   ) +
@@ -523,25 +540,24 @@ staff_long %>%
   scale_color_OkabeIto(order = c(3, 2, 1, 5, 4))
 ```
 
-
-
 ## Use color to draw attention
 
 ```{r}
-staff_long <- staff_long %>%
+staff_long <- staff_long |>
   mutate(faculty_type_color = if_else(faculty_type == "Part-Time Faculty", "firebrick3", "gray40"))
 ```
 
 ```{r}
-#| fig.asp: 0.5
-#| fig.with: 12.0
-staff_long %>%
+#| fig-asp: 0.5
+#| fig-with: 12.0
+
+staff_long |>
   ggplot(aes(x = year, 
              y = percentage, 
              color = faculty_type_color, group = faculty_type)) +
-  geom_line(size = 1, show.legend = FALSE) +
+  geom_line(linewidth = 1, show.legend = FALSE) +
   geom_text(
-    data = staff_long %>% filter(year == max(year)),
+    data = staff_long |> filter(year == max(year)),
     aes(x = year + 1, y = percentage, label = faculty_type),
     hjust = "left", show.legend = FALSE, size = 4
   ) +
@@ -562,18 +578,17 @@ staff_long %>%
   coord_cartesian(clip = "off")
 ```
 
-
-
 ## Pick a purpose
 
 ```{r}
-#| fig.asp: 0.5
-#| fig.with: 12.0
-p <- staff_long %>%
+#| fig-asp: 0.5
+#| fig-with: 12.0
+
+p <- staff_long |>
   ggplot(aes(x = year, 
              y = percentage, 
              color = faculty_type_color, group = faculty_type)) +
-  geom_line(size = 1, show.legend = FALSE) +
+  geom_line(linewidth = 1, show.legend = FALSE) +
   annotate(
     geom = "text",
     x = 2012, y = 41, label = "Part-Time\nFaculty", 
@@ -609,13 +624,12 @@ p <- staff_long %>%
 p
 ```
 
-
-
 ## Use labels to communicate the message
 
 ```{r}
-#| fig.asp: 0.5
-#| fig.with: 12.0
+#| fig-asp: 0.5
+#| fig-with: 12.0
+
 p + 
   labs(
     title = "Instruction by part-time faculty on a steady increase",
@@ -627,13 +641,12 @@ p +
   theme(plot.subtitle = element_text(size = 12))
 ```
 
-
-
 ## Simplify
 
 ```{r}
-#| fig.asp: 0.5
-#| fig.with: 12.0
+#| fig-asp: 0.5
+#| fig-with: 12.0
+
 p + 
   labs(
     title = "Instruction by part-time faculty on a steady increase",
@@ -648,43 +661,21 @@ p +
     )
 ```
 
-
-
 ## Summary
 
-- Represent percentages as parts of a whole
+::: incremental
+-   Represent percentages as parts of a whole
+-   Place variables representing time on the x-axis when possible
+-   Pay attention to data types, e.g., represent time as time on a continuous scale, not years as levels of a categorical variable
+-   Prefer direct labeling over legends
+-   Use accessible colors
+-   Use color to draw attention
+-   Pick a purpose and label, color, annotate for that purpose
+-   Communicate your main message directly in the plot labels
+-   Simplify before you call it done (a.k.a. "Before you leave the house, look in the mirror and take one thing off")
+:::
 
---
-- Place variables representing time on the x-axis when possible
-
---
-- Pay attention to data types, e.g., represent time as time on a continuous scale, not years as levels of a categorical variable
-
---
-- Prefer direct labeling over legends
-
---
-- Use accessible colors
-
---
-- Use color to draw attention
-
---
-- Pick a purpose and label, color, annotate for that purpose
-
---
-- Communicate your main message directly in the plot labels
-
---
-- Simplify before you call it done (a.k.a. "Before you leave the house, look in the mirror and take one thing off")
-
-
-
-## Case study 2: 
-
-## Bachelor's degrees
-
-
+## Case study 2: <br> Bachelor's degrees
 
 ## Data
 
@@ -696,7 +687,7 @@ Only the most popular three fields are identified, the remaining fields are lump
 #| label: load-data-degrees
 #| message: false
 BA_degrees <- read_csv( "data/BA_degrees.csv")
-BA_degrees_other <- BA_degrees %>%
+BA_degrees_other <- BA_degrees |>
   mutate(
     field = if_else(field == "Health professions and related programs", "Health professions", field),
     field = fct_other(field,
@@ -706,40 +697,38 @@ BA_degrees_other <- BA_degrees %>%
         "Social sciences and history"
       )
     ),
-  ) %>%
-  group_by(year, field) %>%
+  ) |>
+  group_by(year, field) |>
   summarise(perc = sum(perc), .groups = "drop") 
 
-BA_degrees_other %>%
-  slice_head(n = 10) %>%
+BA_degrees_other |>
+  slice_head(n = 10) |>
   kable()
 ```
 
+##  {.smaller}
 
-##
-
-.task[
+::: task
 Should these data be displayed in a table or a plot?
-]
+:::
 
 ```{r}
-#| echo: false
-BA_degrees_other %>%
-  pivot_wider(names_from = year, values_from = perc) %>%
-  gt() %>%
+BA_degrees_other |>
+  pivot_wider(names_from = year, values_from = perc) |>
+  gt() |>
   cols_align(
     align = "left",
     columns = field
-  )%>%
+  ) |>
   fmt_percent(
     columns = -field,
     decimals = 0
-  ) %>%
-  cols_label(field = "Field") %>%
+  ) |>
+  cols_label(field = "Field") |>
   tab_spanner(
     label = "Popular Bachelor's degrees over the years",
     columns = everything()
-  ) %>%
+  ) |>
   tab_style(
     style = cell_text(weight = "bold"),
     locations = cells_column_spanners()
@@ -747,17 +736,17 @@ BA_degrees_other %>%
 ```
 
 ```{r}
-#| out.width: 80%
-#| fig.asp: 0.34
-#| echo: false
-#| fig.align: center
-#| fig.width: 9.0
+#| out-width: 80%
+#| fig-asp: 0.34
+#| fig-align: center
+#| fig-width: 9.0
+
 ggplot(BA_degrees_other, aes(x = year, y = perc, 
                              group = field, 
                              color = field)) +
-  geom_line(size = 1, show.legend = FALSE) +
+  geom_line(linewidth = 1, show.legend = FALSE) +
   geom_text(
-    data = BA_degrees_other %>% filter(year == min(year)),
+    data = BA_degrees_other |> filter(year == min(year)),
     aes(
       x = year,
       y = perc,
@@ -776,114 +765,105 @@ ggplot(BA_degrees_other, aes(x = year, y = perc,
   labs(x = "Year", y = NULL)
 ```
 
-
-
 ## Tables vs. plots
 
-.pull-left[
+::: columns
+::: {.column width="50%"}
 **Tables:**
 
-- To look up or compare individual values
-- To display precise values
-- To include detail and summary values
-- To display quantitative values including more than one unit of measure
-]
-.pull-right[
+-   To look up or compare individual values
+-   To display precise values
+-   To include detail and summary values
+-   To display quantitative values including more than one unit of measure
+:::
+
+::: {.column width="50%"}
 **Plots:**
 
-- To reveal relationships among whole sets of values
-- To display a message that is contained in the shape of the values (e.g., patterns, trends, exceptions)
-]
-
-
+-   To reveal relationships among whole sets of values
+-   To display a message that is contained in the shape of the values (e.g., patterns, trends, exceptions)
+:::
+:::
 
 ## Add visualizations to your table
 
 ```{r}
 plot_spark_color <- function(df){
   ggplot(df, aes(x = year, y = perc, color = line_color)) +
-    geom_line(size = 20) +
+    geom_line(linewidth = 20) +
     theme_void() +
     scale_color_identity()
 }
 
-BA_degrees_other_plots_color <- BA_degrees_other %>%
+BA_degrees_other_plots_color <- BA_degrees_other |>
   mutate(line_color = case_when(
     field == "Business" ~ "#9D6C06",
     field == "Health professions" ~ "#077DAA",
     field == "Social sciences and history" ~ "#026D4E",
     field == "Other" ~ "#A39A09"
-  )) %>%
-  nest(field_df = c(year, perc, line_color)) %>%
+  )) |>
+  nest(field_df = c(year, perc, line_color)) |>
   mutate(plot = map(field_df, plot_spark_color))
 
-BA_degrees_other %>% 
-  pivot_wider(names_from = year, values_from = perc) %>%
-  mutate(ggplot = NA, .after = field) %>% 
-  gt() %>% 
+BA_degrees_other |> 
+  pivot_wider(names_from = year, values_from = perc) |>
+  mutate(ggplot = NA, .after = field) |> 
+  gt() |> 
   text_transform(
     locations = cells_body(columns = ggplot),
     fn = function(x){
       map(BA_degrees_other_plots_color$plot, ggplot_image, height = px(15), aspect_ratio = 4)
     }
-  ) %>% 
+  ) |> 
   cols_width(
-    ggplot ~ px(1000)
-    ) %>% 
+    ggplot ~ px(500)
+    ) |> 
   cols_align(
     align = "left",
     columns = field
-  ) %>%
+  ) |>
   fmt_percent(
     columns = where(is.numeric),
     decimals = 0
-  ) %>%
+  ) |>
   tab_style(
     style = cell_text(color = "#9D6C06"),
     locations = cells_body(rows = 1, columns = field)
-  ) %>%
+  ) |>
   tab_style(
     style = cell_text(color = "#077DAA"),
     locations = cells_body(rows = 2, columns = field)
-  ) %>%
+  ) |>
   tab_style(
     style = cell_text(color = "#026D4E"),
     locations = cells_body(rows = 3, columns = field)
-  ) %>%
+  ) |>
   tab_style(
     style = cell_text(color = "#A39A09"),
     locations = cells_body(rows = 4, columns = field)
-  ) %>% 
+  ) |> 
   cols_label(
     field  = "Field",
     ggplot = "Trend"
-  ) %>%
+  ) |>
   tab_spanner(
     label = "Popular Bachelor's degrees over the years",
     columns = everything()
-  ) %>%
+  ) |>
   tab_style(
     style = cell_text(weight = "bold"),
     locations = cells_column_spanners()
   )
 ```
 
-
-
 ## Summary
 
-- A table may be preferable to a visualization
+::: incremental
+-   A table may be preferable to a visualization
+-   A table can be enhanced with a visualization
+:::
 
---
-- A table can be enhanced with a visualization
-
-
-
-## Case study 3: 
-
-## COVID-19 Deaths
-
-
+## Case study 3: <br> COVID-19 Deaths
 
 ## Data
 
@@ -897,33 +877,33 @@ countries <- c(
   "Brazil"
 )
 
-country_data <- coronavirus %>%
+country_data <- coronavirus |>
   # filter for deaths in countries of interest
   filter(
     type == "death",
     country %in% countries
-  ) %>%
+  ) |>
   # fix county labels for pretty plotting
   mutate(
     country = case_when(
       country == "United Kingdom" ~ "UK",
       TRUE ~ country
     )
-  ) %>%
+  ) |>
   # calculate number of total cases for each country and date
-  group_by(country, date) %>%
-  summarise(tot_cases = sum(cases), .groups = "drop_last") %>%
+  group_by(country, date) |>
+  summarise(tot_cases = sum(cases), .groups = "drop_last") |>
   # arrange by date in ascending order
-  arrange(date) %>%
+  arrange(date) |>
   # record daily cumulative cases as cumulative_cases
-  mutate(cumulative_cases = cumsum(tot_cases)) %>%
+  mutate(cumulative_cases = cumsum(tot_cases)) |>
   # only use days since the 10th confirmed death
-  filter(cumulative_cases > 9) %>%
+  filter(cumulative_cases > 9) |>
   # record days elapsed, end date, and end label
   mutate(
     days_elapsed = as.numeric(date - min(date)),
     end_date     = if_else(date == max(date), TRUE, FALSE),
-  ) %>%
+  ) |>
   # ungroup
   ungroup() |>
   mutate(
@@ -935,19 +915,17 @@ Each row represents a country date combination.
 For each combination we have the total number of cases, the cumulative cases, and the days elapsed since 10th confirmed COVID-19 case in that country.
 
 ```{r}
-country_data %>%
-  slice_head(n = 10) %>%
-  select(-end_date, -end_label) %>%
+country_data |>
+  slice_head(n = 10) |>
+  select(-end_date, -end_label) |>
   kable()
 ```
-
-
 
 ## Plot 1: Linear scale
 
 ```{r}
-as_of_date <- country_data %>% 
-  summarise(max(date)) %>% 
+as_of_date <- country_data |> 
+  summarise(max(date)) |> 
   pull()
 as_of_date_formatted <- glue("{wday(as_of_date, label = TRUE)}, {month(as_of_date, label = TRUE)} {day(as_of_date)}, {year(as_of_date)}")
 ```
@@ -965,8 +943,8 @@ p_covid <- ggplot(data = country_data) +
 p_covid_linear <- p_covid +
   aes(x = days_elapsed, y = cumulative_cases,
       color = country, label = end_label) +
-  geom_line(size = 0.7, alpha = 0.8) +
-  geom_point(data = country_data %>% filter(end_date)) +
+  geom_line(linewidth = 0.7, alpha = 0.8) +
+  geom_point(data = country_data |> filter(end_date)) +
   geom_label_repel() +
   guides(color = "none") +
   labs(
@@ -978,16 +956,14 @@ p_covid_linear <- p_covid +
 p_covid_linear
 ```
 
-
-
 ## Plot 2: Logged scale
 
 ```{r}
 p_covid_log <- p_covid +
   aes(x = days_elapsed, y = log(cumulative_cases),
       color = country, label = end_label) +
-  geom_line(size = 0.7, alpha = 0.8) +
-  geom_point(data = country_data %>% filter(end_date)) +
+  geom_line(linewidth = 0.7, alpha = 0.8) +
+  geom_point(data = country_data |> filter(end_date)) +
   geom_label_repel() +
   guides(color = "none") +
   labs(
@@ -999,21 +975,20 @@ p_covid_log <- p_covid +
 p_covid_log
 ```
 
-
-
 ## 
 
-.task[
+::: task
 Which plot do you prefer, and why?
-]
+:::
 
 ```{r}
-#| fig.width: 12.0
+#| fig-width: 12.0
+
 p_covid_linear_patch <- ggplot(data = country_data) +
   aes(x = days_elapsed, y = cumulative_cases,
       color = country,label = end_label) +
-  geom_line(size = 0.7, alpha = 0.8) +
-  geom_point(data = country_data %>% filter(end_date)) +
+  geom_line(linewidth = 0.7, alpha = 0.8) +
+  geom_point(data = country_data |> filter(end_date)) +
   geom_label_repel() +
   guides(color = "none") +
   labs(
@@ -1028,8 +1003,8 @@ p_covid_linear_patch <- ggplot(data = country_data) +
 p_covid_log_patch <- ggplot(data = country_data) +
   aes(x = days_elapsed, y = log(cumulative_cases),
       color = country,label = end_label) +
-  geom_line(size = 0.7, alpha = 0.8) +
-  geom_point(data = country_data %>% filter(end_date)) +
+  geom_line(linewidth = 0.7, alpha = 0.8) +
+  geom_point(data = country_data |> filter(end_date)) +
   geom_label_repel() +
   guides(color = "none") +
   labs(
@@ -1049,24 +1024,23 @@ p_covid_linear_patch + p_covid_log_patch +
   )
 ```
 
-
-
 ## 
 
-.task[
+::: task
 Zoom in to the first 25 days: Which plot do you prefer, and why?
-]
+:::
 
 ```{r}
-#| fig.width: 12.0
-country_data_25 <-  country_data %>%
-  filter(days_elapsed <= 25) %>%
+#| fig-width: 12.0
+
+country_data_25 <-  country_data |>
+  filter(days_elapsed <= 25) |>
   mutate(end_label = if_else(days_elapsed == 25, country, NA_character_))
 
 p_covid_linear_patch_25 <- ggplot(data = country_data_25) +
   aes(x = days_elapsed, y = cumulative_cases,
       color = country,label = end_label) +
-  geom_line(size = 0.7, alpha = 0.8) +
+  geom_line(linewidth = 0.7, alpha = 0.8) +
   geom_label_repel() +
   guides(color = "none") +
   labs(
@@ -1081,7 +1055,7 @@ p_covid_linear_patch_25 <- ggplot(data = country_data_25) +
 p_covid_log_patch_25 <- ggplot(data = country_data_25) +
   aes(x = days_elapsed, y = log(cumulative_cases),
       color = country,label = end_label) +
-  geom_line(size = 0.7, alpha = 0.8) +
+  geom_line(linewidth = 0.7, alpha = 0.8) +
   geom_label_repel() +
   guides(color = "none") +
   labs(
@@ -1101,31 +1075,27 @@ p_covid_linear_patch_25 + p_covid_log_patch_25 +
   )
 ```
 
-
-
 ## Summary
 
-- Your data scale matters!
+::: incremental
+-   Your data scale matters!
+-   Keep in mind not just best practices, but also your audience and the amount of supplementary information you can provide
+:::
 
---
-- Keep in mind not just best practices, but also your audience and the amount of supplementary information you can provide
-
-
-
-# visualizion .hand[resources]
-
-
+# visualizion [resources]{.hand}
 
 ## Resources
 
-- Books:
-  - [Data Visualization: A practical introduction](https://socviz.co/) by Kieran Healy
-  - [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) by Claus O. Wilke
-  - [How charts lie](http://www.thefunctionalart.com/p/reviews.html) by Alberto Cairo
-  - [Presenting Data Effectively](https://stephanieevergreen.com/books/) by Stephanie Evergreen
-  - [Datavision](https://www.amazon.com/Datavision-2-David-McCandless/dp/2221145925) by David McCandless
-  
-- Community: [Data Visualization Society](https://www.datavisualizationsociety.org/resources)
+-   Books:
 
-- Tools: All visualizations presented have been created with [R](https://cran.r-project.org/) and [ggplot2](https://ggplot2.tidyverse.org/)
-  - For those who are interested, the source code can be found [here](https://github.com/mine-cetinkaya-rundel/2021-data-viz-nc)
+    -   [Data Visualization: A practical introduction](https://socviz.co/) by Kieran Healy
+    -   [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) by Claus O. Wilke
+    -   [How charts lie](http://www.thefunctionalart.com/p/reviews.html) by Alberto Cairo
+    -   [Presenting Data Effectively](https://stephanieevergreen.com/books/) by Stephanie Evergreen
+    -   [Datavision](https://www.amazon.com/Datavision-2-David-McCandless/dp/2221145925) by David McCandless
+
+-   Community: [Data Visualization Society](https://www.datavisualizationsociety.org/resources)
+
+-   Tools: All visualizations presented have been created with [R](https://cran.r-project.org/) and [ggplot2](https://ggplot2.tidyverse.org/)
+
+    -   For those who are interested, the source code can be found [here](https://github.com/mine-cetinkaya-rundel/2021-data-viz-nc)
