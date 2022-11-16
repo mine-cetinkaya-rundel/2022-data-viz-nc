@@ -1100,4 +1100,4 @@ p_covid_linear_patch_25 + p_covid_log_patch_25 +
 
 -   Tools: All visualizations presented have been created with [R](https://cran.r-project.org/) and [ggplot2](https://ggplot2.tidyverse.org/)
 
-    -   For those who are interested, the source code can be found [here](https://github.com/mine-cetinkaya-rundel/2021-data-viz-nc)
+    -   For those who are interested, the source code can be found [here](https://github.com/mine-cetinkaya-rundel/2022-data-viz-nc)
