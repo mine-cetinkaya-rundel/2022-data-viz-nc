@@ -36,7 +36,7 @@ set.seed(1234)
 
 # [why]{.hand} visualize
 
-## 
+##  {.center}
 
 > *"The simple graph has brought more information to the data analyst's mind than any other device."*
 >
@@ -133,7 +133,7 @@ datasaurus_dozen |>
 ## 
 
 ::: columns
-::: {.column width="27%"}
+::: {.column width="15%"}
 ::: task
 And some more summary statistics...
 
@@ -144,7 +144,7 @@ How, if at all, are these 13 datasets different from each other?
 ::: {.column width="3%"}
 :::
 
-::: {.column width="70%"}
+::: {.column width="82%"}
 ```{r}
 datasaurus_dozen |>
   group_by(dataset) |>
@@ -271,9 +271,7 @@ knitr::include_graphics("images/healy-excess_all_cause_by_jurisdiction.png")
 Source: Kieran Healy - [Excess Deaths in 2020](https://kieranhealy.org/blog/archives/2021/10/21/excess-deaths-in-2020/), 21 Oct 2021.
 :::
 
-# [how]{.hand} visualize
-
-## and [how not]{.hand}
+# [how]{.hand} (and [how not]{.hand}) visualize
 
 ## Case study 1: <br> Trends instructional staff employees in universities {.center}
 
@@ -363,7 +361,7 @@ staff_long |>
     legend.key.size = unit(0.2, "cm"),
     legend.key.height = unit(0.1, "cm"),
     legend.text.align = 0,
-    legend.background = element_rect(color = "black", size = 0.2),
+    legend.background = element_rect(color = "black", linewidth = 0.2),
     legend.text = element_text(size = 7),
     panel.grid.minor = element_blank(),
     panel.grid.major.x = element_blank(),
@@ -675,7 +673,7 @@ p +
 -   Simplify before you call it done (a.k.a. "Before you leave the house, look in the mirror and take one thing off")
 :::
 
-## Case study 2: <br> Bachelor's degrees
+## Case study 2: <br> Bachelor's degrees {.center}
 
 ## Data
 
@@ -787,7 +785,11 @@ ggplot(BA_degrees_other, aes(x = year, y = perc,
 
 ## Add visualizations to your table
 
+![](images/sparkline-table.png){fig-align="center"}
+
 ```{r}
+#| eval: false
+
 plot_spark_color <- function(df){
   ggplot(df, aes(x = year, y = perc, color = line_color)) +
     geom_line(linewidth = 20) +
@@ -816,7 +818,7 @@ BA_degrees_other |>
     }
   ) |> 
   cols_width(
-    ggplot ~ px(500)
+    ggplot ~ px(300)
     ) |> 
   cols_align(
     align = "left",
@@ -863,7 +865,7 @@ BA_degrees_other |>
 -   A table can be enhanced with a visualization
 :::
 
-## Case study 3: <br> COVID-19 Deaths
+## Case study 3: <br> COVID-19 Deaths {.center}
 
 ## Data
 
